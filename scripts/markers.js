@@ -1,7 +1,6 @@
 
 // Function to create markers
 function createMarkers(chapters) {
-  // START OF MARKER CREATION
   markers = []; // Clear existing markers
   for (var i in chapters) {
     var c = chapters[i];
@@ -9,7 +8,6 @@ function createMarkers(chapters) {
       var lat = parseFloat(c['Latitude']);
       var lon = parseFloat(c['Longitude']);
       
-      // Create marker
       var marker = L.marker([lat, lon], {
         icon: L.ExtraMarkers.icon({
           icon: 'fa-number',
@@ -22,12 +20,11 @@ function createMarkers(chapters) {
       
       marker.bindPopup(c['Chapter']);
       marker.properties = c;
-      marker.originalColor = c['Marker Color'] || 'blue'; // Store the original color
       markers.push(marker);
     }
   }
-  // END OF MARKER CREATION
 }
+
 
 
 

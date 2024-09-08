@@ -4,6 +4,7 @@ var currentYear = 1930; // Start year
 var endYear = 1945; // End year
 var markers = []; // Define the markers array
 var closedBusinessColor = 'black'; 
+var mapboxgl;
 
 
 
@@ -79,34 +80,63 @@ $(window).on('load', function() {
 
  
    // Loads the basemap and adds it to the map
+  
+function addBaseMap() {
+  mapboxgl = window.mapboxgl;
+  mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'; // Replace with your Mapbox access token
 
-
-
-  function addBaseMap() {
-      var Thunderforest_Pioneer = L.tileLayer('https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey={apikey}', {
-    attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    apikey: '1a9c23f36ad24df7a2b608bd27cc6a45',
-    maxZoom: 22
+  map = new mapboxgl.Map({
+    container: 'map', // HTML element id where the map should be rendered
+    style: applySnazzyStyle(snazzyMapStyle),
+    center: [0, 0], // Starting position [lng, lat]
+    zoom: 2 // Starting zoom
   });
 
-    var basemap = trySetting('_tileProvider', '');
-    L.tileLayer.provider(basemap, {
-      maxZoom: 18,
-      
-      // Pass the api key to most commonly used parameters
-      apiKey: trySetting('_tileProviderApiKey', ''),
-      apikey: trySetting('_tileProviderApiKey', ''),
-      api_key: '646d29b1-9794-470a-8fbb-b0adbc18bb2f', // this is stadia api key 
-
-
-      key: trySetting('_tileProviderApiKey', ''),
-      accessToken: trySetting('_tileProviderApiKey', '')
-    }).addTo(map);
+  // Add zoom controls
+  map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+}
 
 
 
-      Thunderforest_Pioneer.addTo(map);
-  }
+// Add this function to apply the Snazzy style:
+function applySnazzyStyle(style) {
+  return {
+    version: 8,
+    name: 'Snazzy Map',
+    sources: {
+      'osm': {
+        type: 'raster',
+        tiles: ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'],
+        tileSize: 256,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      }
+    },
+    layers: [{
+      id: 'osm',
+      type: 'raster',
+      source: 'osm',
+      paint: {
+        'raster-fade-duration': 0
+      }
+    }],
+    ...style
+  };
+}
+
+
+const snazzyMapStyle = {
+  // Paste your Snazzy Maps style JSON here
+  // For example:
+  "styles": [
+    {
+      "featureType": "all",
+      "elementType": "labels.text.fill",
+      "stylers": [{"color": "#ffffff"}]
+    },
+    // ... more style rules ...
+  ]
+};
+
 
 
 
@@ -163,35 +193,19 @@ $(window).on('load', function() {
       }
     }
 
-
-    for (i in chapters) {
+  map.on('load', function() {
+    for (var i in chapters) {
       var c = chapters[i];
-
-      if ( !isNaN(parseFloat(c['Latitude'])) && !isNaN(parseFloat(c['Longitude']))) {
-        var lat = parseFloat(c['Latitude']);
-        var lon = parseFloat(c['Longitude']);
-
-        chapterCount += 1;
-
-        markers.push(
-          L.marker([lat, lon], {
-            icon: L.ExtraMarkers.icon({
-              icon: 'fa-number',
-              number: c['Marker'] === 'Numbered'
-                ? chapterCount
-                : (c['Marker'] === 'Plain'
-                  ? ''
-                  : c['Marker']), 
-              markerColor: c['Marker Color'] || 'blue'
-            }),
-            opacity: c['Marker'] === 'Hidden' ? 0 : 0.9,
-            interactive: c['Marker'] === 'Hidden' ? false : true,
-          }
-        ));
-
-      } else {
-        markers.push(null);
+      if (!isNaN(parseFloat(c['Latitude'])) && !isNaN(parseFloat(c['Longitude']))) {
+        var marker = new mapboxgl.Marker()
+          .setLngLat([parseFloat(c['Longitude']), parseFloat(c['Latitude'])])
+          .addTo(map);
+        
+        markers.push(marker);
       }
+    }
+
+
 
   // Add chapter container
 var container = $('<div></div>', {
@@ -201,12 +215,6 @@ var container = $('<div></div>', {
 
 // Add chapter header
 container.append('<p class="chapter-header">' + c['Chapter'] + '</p>');
-
-
-
-
-
-
 
 // Handle multiple media items
 var mediaLinks = c['Media Link'] ? c['Media Link'].split(',').map(item => item.trim()) : [];
@@ -297,7 +305,7 @@ for (var j = 0; j < mediaLinks.length; j++) {
   }
 }
 
-
+// Add description after media
 container.append('<p class="description">' + c['Description'] + '</p>');
 
 // Append the entire container to the contents
@@ -466,20 +474,14 @@ $('#contents').append(container);
     }
 
   // Add markers to the map and fit map to their bounds
-  var bounds = [];
-  for (i in markers) {
-    if (markers[i]) {
-      markers[i].addTo(map);
-      markers[i]['_pixelsAbove'] = pixelsAbove[i];
-      markers[i].on('click', function() {
-        var pixels = parseInt($(this)[0]['_pixelsAbove']) + 5;
-        $('div#contents').animate({
-          scrollTop: pixels + 'px'});
-      });
-      bounds.push(markers[i].getLatLng());
-    }
+    // Fit map to marker bounds
+    var bounds = new mapboxgl.LngLatBounds();
+    markers.forEach(function(marker) {
+      bounds.extend(marker.getLngLat());
+    });
+    map.fitBounds(bounds, { padding: 50 });
+
   }
-  map.fitBounds(bounds);
 
   $('#map, #narration, #title').css('visibility', 'visible');
   $('div.loader').css('visibility', 'hidden');
@@ -495,10 +497,46 @@ $('#contents').append(container);
       }, 2000);
     }
 
+    // Add Google Analytics if the ID exists
+    var ga = getSetting('_googleAnalytics');
+    if ( ga && ga.length >= 10 ) {
+      var gaScript = document.createElement('script');
+      gaScript.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=' + ga);
+      document.head.appendChild(gaScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', ga);
+    }
+
   }
 
 
+  /**
+   * Changes map attribution (author, GitHub repo, email etc.) in bottom-right
+   */
   function changeAttribution() {
+    var attributionHTML = $('.leaflet-control-attribution')[0].innerHTML;
+    var credit = 'View <a href="'
+      // Show Google Sheet URL if the variable exists and is not empty, otherwise link to Chapters.csv
+      + (typeof googleDocURL !== 'undefined' && googleDocURL ? googleDocURL : './csv/Chapters.csv')
+      + '" target="_blank">data</a>';
+    var name = getSetting('_authorName');
+    var url = getSetting('_authorURL');
+    if (name && url) {
+      if (url.indexOf('@') > 0) { url = 'mailto:' + url; }
+      credit += ' by <a href="' + url + '">' + name + '</a> | ';
+    } else if (name) {
+      credit += ' by ' + name + ' | ';
+    } else {
+      credit += ' | ';
+    }
+
+    credit += 'View <a href="' + getSetting('_githubRepo') + '">code</a>';
+    if (getSetting('_codeCredit')) credit += ' by ' + getSetting('_codeCredit');
+    credit += ' with ';
+    $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
   }
 
 });
