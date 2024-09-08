@@ -114,7 +114,7 @@ function initMap(options, chapters) {
  
 
   markers = createMarkers(chapters);
-  updateMarkers();
+ 
 
  initializeTimeSlider();
   updateMarkers(); // This uses the function from fourmarker.js

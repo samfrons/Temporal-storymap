@@ -23,7 +23,21 @@ function createMarker(c, i) {
       interactive: c['Marker'] === 'Hidden' ? false : true,
     });
     
-    marker.bindPopup(c['Chapter']);
+    var popupContent = `
+      <div class="custom-popup">
+        <h3>${c['Chapter']}</h3>
+        <p><strong>Location:</strong> ${c['Location']}</p>
+        <p><strong>Start Date:</strong> ${c['Start date'] || 'N/A'}</p>
+        <p><strong>End Date:</strong> ${c['End date'] || 'N/A'}</p>
+        <p>${c['Description'] || ''}</p>
+      </div>
+    `;
+    
+    marker.bindPopup(popupContent, {
+      maxWidth: 300,
+      closeButton: false
+    });
+    
     marker.properties = c;
     return marker;
   }
@@ -66,9 +80,12 @@ function updateMarkers(activeIndex) {
         markerClass = activeMarkerClass;
       }
       
-      // Add 'active' class if this is the active marker
+      // Check if this is the active marker
       if (parseInt(i) === activeIndex) {
         markerClass += ' marker-active';
+        m.openPopup(); // Open the popup for the active marker
+      } else {
+        m.closePopup(); // Close the popup for inactive markers
       }
       
       m.setIcon(L.divIcon({
