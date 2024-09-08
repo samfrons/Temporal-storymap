@@ -1,7 +1,27 @@
+@font-face {
+  font-family: "Bebas";
+  src:
+    local("Bebas"),
+    url("../media/Bebas-Regular.otf") format("opentype") tech(color-COLRv1),
+    url("../media/Bebas-Regular.otf") format("opentype"),
+    url("../media/Bebas-Regular.ttf");
+}
+
+
+@font-face {
+  font-family: "Century ATF Old Style BQ";
+  src:
+    local("Bebas"),
+    url("../media/CenturyATFOldStyleBQ-Regular.otf") format("opentype") tech(color-COLRv1),
+    url("../media/CenturyATFOldStyleBQ-Regular.otf") format("opentype"),
+   
+}
+
+
 body {
   padding: 0px;
   margin: 0px;
-font-family: "century atf old style bq", serif;
+font-family: "Century ATF Old Style BQ", serif;
   overflow: hidden;
 }
 a {
@@ -30,7 +50,7 @@ a:hover {
   height: calc(100vh - 203px);
   z-index: 80;
   background-color: #fffff5 !important;
-  background-image: url(../media/img/paper.jpg);
+  background-image: url('../media/img/paper.jpg');
   color: darkslategray !important;
 }
 
@@ -41,7 +61,7 @@ a:hover {
   height: 100%; /* Adjust to fit max Description length, one setting for all; alternative is 100% */
   overflow-y: scroll;
   overflow-x: hidden;
-   background-image: url(../media/img/paper.jpg);
+   background-image: url('../media/img/paper.jpg');
 }
 
 span:hover {
