@@ -1,0 +1,14 @@
+.time-slider-container {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.time-slider {
+  width: 200px;
+}
+
+.year-display {
+  text-align: center;
+  margin-top: 5px;
+}
