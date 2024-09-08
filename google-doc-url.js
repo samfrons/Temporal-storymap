@@ -6,4 +6,4 @@ var googleApiKey = 'AIzaSyBMLqcmm_1A7FcW8elFQOKk2NT_ShK0y9M';
 
 
 
-// 646d29b1-9794-470a-8fbb-b0adbc18bb2f // stadia api key
+// 646d29b1-9794-470a-8fbb-b0adbc18bb2f // stadia api key //https://docs.stadiamaps.com/authentication/

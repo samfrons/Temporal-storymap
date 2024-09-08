@@ -1,7 +1,7 @@
 body {
   padding: 0px;
   margin: 0px;
-  font-family: "Helvetica", sans-serif;
+  font-family: "Futura", sans-serif;
   overflow: hidden;
 }
 
@@ -9,7 +9,7 @@ body {
   height: 200px;
   width: 100vw;
   position: absolute;
-  border-bottom: 3px solid orange;
+  border-bottom: 0px solid orange;
   top: 0;
   left: 0;
 }
@@ -20,6 +20,8 @@ body {
   width: 100vw;
   height: calc(100vh - 203px);
   z-index: 80;
+  background-color: beige !important;
+      color: darkslategray !important;
 }
 
 #contents {
@@ -47,7 +49,7 @@ body {
   position: absolute;
   left: 0;
   top: 203px;
-  background-color: white;
+  background-color: beige !important;
   width: 100vw;
   z-index: 100;
   margin: 0;
@@ -55,6 +57,7 @@ body {
   visibility: hidden;
   font-weight: bold;
   text-align: center;
+      color: darkslategray !important;
 }
 
 .chapter-container {
@@ -98,9 +101,10 @@ body {
 .chapter-header {
   display: block;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1.5em;
   padding: 0 5px;
   font-family: "Bebas";
+  margin: 5px;
 }
 
 .source {
@@ -122,6 +126,7 @@ a.source:visited {
 
 .in-focus {
   opacity: 1.0;
+  background-color: bisque;
 }
 
 .out-focus {
@@ -142,7 +147,26 @@ a.source:visited {
   If you want to change the color, see options here: https://github.com/coryasilva/Leaflet.ExtraMarkers/blob/master/src/assets/css/leaflet.extra-markers.css
 */
 .marker-active {
-  background-position: -72px 0 !important;
+  background-position: -14px 0 !important;
+}
+
+.custom-marker {
+  transition: all 0.3s ease;
+}
+.marker-active {
+  transform: scale(1.2);
+}
+
+.extra-marker {
+  background-size: 80px;
+  background-position: -14px 0 !important;
+}
+
+.extra-marker i, i.fa-number {
+      position: absolute;
+    top: -20px;
+    color: #5e242a !important;
+    font-family: "Bebas";
 }
 
 /* Storymap logo image above the title */
@@ -163,21 +187,22 @@ a.source:visited {
 #header {
   padding: 5px 0;
   text-align: center;
-  color: #333;
+      color: darkslategray !important;
 }
 
 /* Storymap title & subtitle */
 h1 {
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.9em;
   font-family: "Bebas";
 }
 
 h2 {
   margin: 0;
-  font-size: 1.1em;
+  font-size: 1.4em;
   font-weight: normal;
   font-family: "Bebas";
+  padding: 5%;
 }
 
 

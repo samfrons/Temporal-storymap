@@ -11,23 +11,49 @@ function createMarkers(chapters) {
       var lat = parseFloat(c['Latitude']);
       var lon = parseFloat(c['Longitude']);
       
+      var svgIcon = L.divIcon({
+        html: `<img src="${svgIconUrl}" class="custom-marker" style="width:30px;height:30px;">`,
+        className: '',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30]
+      });
+      
       var marker = L.marker([lat, lon], {
-        icon: L.ExtraMarkers.icon({
-          icon: 'fa-number',
-          number: c['Marker'] === 'Numbered' ? parseInt(i) + 1 : '',
-          markerColor: c['Marker Color'] || 'blue'
-        }),
+        icon: svgIcon,
         opacity: c['Marker'] === 'Hidden' ? 0 : 0.9,
         interactive: c['Marker'] === 'Hidden' ? false : true,
       });
+
+
+
+       // Create custom popup content
+      var popupContent = `
+        <div class="custom-popup">
+          <h3>${c['Chapter']}</h3>
+          <p><strong>Location:</strong> ${c['Location']}</p>
+          <p><strong>Start Date:</strong> ${c['Start date'] || 'N/A'}</p>
+          <p><strong>End Date:</strong> ${c['End date'] || 'N/A'}</p>
+        </div>
+      `;
       
-      marker.bindPopup(c['Chapter']);
+      marker.bindPopup(popupContent);
       marker.properties = c;
+      marker.originalColor = c['Marker Color'] || 'blue'; // Store the original color
       markers.push(marker);
     }
   }
 }
 
+function markActiveColor(k) {
+  for (var i = 0; i < markers.length; i++) {
+    if (markers[i] && markers[i]._icon) {
+      markers[i]._icon.classList.remove('marker-active');
+      if (i == k) {
+        markers[k]._icon.classList.add('marker-active');
+      }
+    }
+  }
+}
 
 
 
