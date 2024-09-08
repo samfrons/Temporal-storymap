@@ -20,7 +20,7 @@ body {
   width: 100vw;
   height: calc(100vh - 203px);
   z-index: 80;
-  background-color: beige !important;
+  background-color: #fffff5 !important;
       color: darkslategray !important;
 }
 
@@ -227,4 +227,47 @@ h2 {
 
 .leaflet-popup-tip {
   background: #f7f7f7;
+}
+
+
+.default-marker {
+  background-color: gray;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.active-marker {
+  background-color: blue;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.marker-active {
+  background-color: red;
+}
+
+.mid-state-marker {
+  background-color: yellow;
+  border-radius: 50%;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  font-family: bebas;
+  line-height: 30px;
+}
+
+.end-state-marker {
+  background-color: black;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-family: bebas;
+  font-weight: bold;
+  line-height: 30px;
 }

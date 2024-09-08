@@ -40,3 +40,4 @@ function initializeTimeSlider() {
   timeSlider = new TimeSlider({ position: 'bottomright' }).addTo(map);
   // END OF TIME SLIDER INITIALIZATION
 }
+

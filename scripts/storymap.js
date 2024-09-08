@@ -109,14 +109,15 @@ $(window).on('load', function() {
   }
 
 
-
-  function initMap(options, chapters) {
-
+function initMap(options, chapters) {
   createDocumentSettings(options);
-  createMarkers(chapters);
-  initializeTimeSlider();
+ 
+
+  markers = createMarkers(chapters);
   updateMarkers();
 
+ initializeTimeSlider();
+  updateMarkers(); // This uses the function from fourmarker.js
 
     var chapterContainerMargin = 70;
 
@@ -143,7 +144,9 @@ $(window).on('load', function() {
       }).addTo(map);
     }
 
-    var pixelsAbove = [];
+  var pixelsAbove = [];
+  var bounds = [];
+
     var chapterCount = 0;
     var currentlyInFocus; // integer to specify each chapter is currently in focus
     var overlay;  // URL of the overlay for in-focus chapter
@@ -189,9 +192,11 @@ $(window).on('load', function() {
           }
         ));
 
-      } else {
-        markers.push(null);
-      }
+        
+
+      } 
+
+
 
   // Add chapter container
 var container = $('<div></div>', {
@@ -201,12 +206,6 @@ var container = $('<div></div>', {
 
 // Add chapter header
 container.append('<p class="chapter-header">' + c['Chapter'] + '</p>');
-
-
-
-
-
-
 
 // Handle multiple media items
 var mediaLinks = c['Media Link'] ? c['Media Link'].split(',').map(item => item.trim()) : [];
@@ -481,21 +480,20 @@ $('#contents').append(container);
   }
   map.fitBounds(bounds);
 
+  // Make elements visible
   $('#map, #narration, #title').css('visibility', 'visible');
   $('div.loader').css('visibility', 'hidden');
   $('div#container0').addClass("in-focus");
   $('div#contents').animate({scrollTop: '1px'});
 
-
-    // On first load, check hash and if it contains an number, scroll down
-    if (parseInt(location.hash.substr(1))) {
-      var containerId = parseInt( location.hash.substr(1) ) - 1;
-      $('#contents').animate({
-        scrollTop: $('#container' + containerId).offset().top
-      }, 2000);
-    }
-
+  // On first load, check hash and if it contains a number, scroll down
+  if (parseInt(location.hash.substr(1))) {
+    var containerId = parseInt(location.hash.substr(1)) - 1;
+    $('#contents').animate({
+      scrollTop: $('#container' + containerId).offset().top
+    }, 2000);
   }
+}
 
 
   function changeAttribution() {
