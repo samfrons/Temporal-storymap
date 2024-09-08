@@ -1,8 +1,17 @@
 body {
   padding: 0px;
   margin: 0px;
-  font-family: "Futura", sans-serif;
+font-family: "century atf old style bq", serif;
   overflow: hidden;
+}
+a {
+  color: rgb(0,120,168) !important;
+  font-weight: bold;
+}
+
+a:hover {
+  color: rgb(110,120,168) !important;
+  font-weight: bold;
 }
 
 #map {
@@ -21,7 +30,8 @@ body {
   height: calc(100vh - 203px);
   z-index: 80;
   background-color: #fffff5 !important;
-      color: darkslategray !important;
+  background-image: url(../media/img/paper.jpg);
+  color: darkslategray !important;
 }
 
 #contents {
@@ -31,6 +41,11 @@ body {
   height: 100%; /* Adjust to fit max Description length, one setting for all; alternative is 100% */
   overflow-y: scroll;
   overflow-x: hidden;
+   background-image: url(../media/img/paper.jpg);
+}
+
+span:hover {
+  color: #0078A8;
 }
 
 #top {
@@ -50,6 +65,7 @@ body {
   left: 0;
   top: 203px;
   background-color: beige !important;
+  background-image: url(../media/img/paper.jpg);
   width: 100vw;
   z-index: 100;
   margin: 0;
@@ -57,8 +73,13 @@ body {
   visibility: hidden;
   font-weight: bold;
   text-align: center;
-      color: darkslategray !important;
+  color: darkslategray !important;
 }
+
+
+  #container0 {
+        margin: 170px 0 0 0;
+  }
 
 .chapter-container {
   /* margin + padding = chapterContainerMargin in script.js */
@@ -88,6 +109,7 @@ body {
   height: 200px;
   max-height: 200px;
   width: 100%;
+  mix-blend-mode: multiply;
 }
 
 .audio-container {
@@ -101,7 +123,7 @@ body {
 .chapter-header {
   display: block;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.8em;
   padding: 0 5px;
   font-family: "Bebas";
   margin: 5px;
@@ -117,16 +139,18 @@ a.source:visited {
 }
 
 .description {
-  margin: 20px;
+  margin: 10px;
   text-align: left;
-  font-size: 11pt;
+  font-size: 12pt;
   padding: 20px;
-  font-family: "Futura";
+  font-family: "century atf old style bq", serif;
 }
 
 .in-focus {
   opacity: 1.0;
   background-color: bisque;
+    background-image: url(../media/img/paper.jpg);
+    background-blend-mode: luminosity;
 }
 
 .out-focus {
@@ -146,15 +170,14 @@ a.source:visited {
   By default, current (active) marker is orange.
   If you want to change the color, see options here: https://github.com/coryasilva/Leaflet.ExtraMarkers/blob/master/src/assets/css/leaflet.extra-markers.css
 */
-.marker-active {
-  background-position: -14px 0 !important;
-}
+
 
 .custom-marker {
   transition: all 0.3s ease;
 }
 .marker-active {
-  transform: scale(1.2);
+  background-position: -14px 0 !important;
+ 
 }
 
 .extra-marker {
@@ -165,6 +188,7 @@ a.source:visited {
 .extra-marker i, i.fa-number {
       position: absolute;
     top: -20px;
+    display: none;
     color: #5e242a !important;
     font-family: "Bebas";
 }
@@ -193,16 +217,18 @@ a.source:visited {
 /* Storymap title & subtitle */
 h1 {
   margin: 0;
-  font-size: 1.9em;
+  font-size: 2.5em;
   font-family: "Bebas";
+  mix-blend-mode: difference;
 }
 
 h2 {
   margin: 0;
-  font-size: 1.4em;
+  font-size: 1.6em;
   font-weight: normal;
   font-family: "Bebas";
   padding: 5%;
+ mix-blend-mode: color-burn;
 }
 
 
@@ -230,26 +256,40 @@ h2 {
 }
 
 
-.default-marker {
-  background-color: gray;
+.extra-marker {
+  background:url('') no-repeat 0 0;position:absolute;left:0;top:0;display:block;text-align:center; background-size:540px 184px}
+
+
+/* this is confusing, but this is actually the detault marker */
+.default-marker, .active-marker {
+  background-color: rgb(0,120,168);
   border-radius: 50%;
+  font-family: 'Bebas', serif;
   text-align: center;
   color: white;
   font-weight: bold;
   line-height: 30px;
 }
 
-.active-marker {
-  background-color: darkslategray;
-  border-radius: 50%;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  line-height: 30px;
+.active-marker:hover {
+  opacity: .5 !important;
+}
+
+.extra-marker:hover {
+  opacity: .5 !important;
 }
 
 .marker-active {
-  background-color: gold;
+ background-color: red;
+     margin-left: -17px !important;
+    margin-top: -35px !important;
+    mix-blend-mode: plus-lighter;
+    max-width: 40px;
+    height: 40px;
+    max-height: 40px !important;
+    opacity: 1;
+  background-position: 0px 0px;
+  background-size: 60px 100%;
    border-radius: 50%;
   text-align: center;
   color: white;
@@ -257,8 +297,10 @@ h2 {
   line-height: 30px;
 }
 
+
 .mid-state-marker {
-  background-color: yellow;
+  background-color: green;
+  
   border-radius: 50%;
   text-align: center;
   color: black;
@@ -278,7 +320,7 @@ h2 {
 }
 
 .time-slider-container {
-    background-color: rgba(234, 231, 220, 0.8);
+    background-color: rgba(244, 241, 240, 1);
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -290,7 +332,7 @@ h2 {
     height: 10px;
     background: #d3d3be;
     outline: none;
-    opacity: 0.7;
+    opacity: 1;
     transition: opacity .2s;
     border-radius: 5px;
 }
