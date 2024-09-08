@@ -1,17 +1,9 @@
-@font-face {
-  font-family: "Bebas";
-  src:
-    local("Bebas"),
-    url("../media/Bebas-Regular.otf") format("opentype") tech(color-COLRv1),
-    url("../media/Bebas-Regular.otf") format("opentype"),
-    url("../media/Bebas-Regular.ttf");
-}
 
 
 @font-face {
   font-family: "Century ATF Old Style BQ";
   src:
-    local("Bebas"),
+    local("Century ATF Old Style BQ"),
     url("../media/CenturyATFOldStyleBQ-Regular.otf") format("opentype") tech(color-COLRv1),
     url("../media/CenturyATFOldStyleBQ-Regular.otf") format("opentype"),
    
@@ -145,7 +137,7 @@ span:hover {
   text-align: center;
   font-size: 1.8em;
   padding: 0 5px;
-  font-family: "Bebas";
+  font-family: "Bebas Neue", sans-serif;
   margin: 5px;
 }
 
@@ -210,7 +202,7 @@ a.source:visited {
     top: -20px;
     display: none;
     color: #5e242a !important;
-    font-family: "Bebas";
+    font-family: "Bebas Neue", sans-serif;
 }
 
 /* Storymap logo image above the title */
@@ -238,7 +230,7 @@ a.source:visited {
 h1 {
   margin: 0;
   font-size: 2.5em;
-  font-family: "Bebas";
+  font-family: "Bebas Neue", sans-serif;
   mix-blend-mode: difference;
 }
 
@@ -246,7 +238,7 @@ h2 {
   margin: 0;
   font-size: 1.6em;
   font-weight: normal;
-  font-family: "Bebas";
+  font-family: "Bebas Neue", sans-serif;
   padding: 5%;
  mix-blend-mode: color-burn;
 }
