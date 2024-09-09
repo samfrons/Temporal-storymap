@@ -8,6 +8,7 @@ var midStateMarkerClass = 'mid-state-marker';
 var endStateMarkerClass = 'end-state-marker';
 
 function createMarker(c, i) {
+  console.log('Creating marker for chapter:', c['Chapter']);
   if (!isNaN(parseFloat(c['Latitude'])) && !isNaN(parseFloat(c['Longitude']))) {
     var lat = parseFloat(c['Latitude']);
     var lon = parseFloat(c['Longitude']);
@@ -38,13 +39,21 @@ function createMarker(c, i) {
       closeButton: false
     });
     
+    marker.on('click', function() {
+      console.log('Marker clicked:', c['Chapter']);
+      this.openPopup();
+    });
+
     marker.properties = c;
+    console.log('Marker created successfully for:', c['Chapter']);
     return marker;
   }
+  console.log('Invalid coordinates for chapter:', c['Chapter']);
   return null;
 }
 
 function createMarkers(chapters) {
+  console.log('Creating markers for', chapters.length, 'chapters');
   markers = []; // Clear existing markers
   for (var i in chapters) {
     var c = chapters[i];
@@ -55,17 +64,18 @@ function createMarkers(chapters) {
       markers.push(null);
     }
   }
+  console.log('Created', markers.filter(m => m !== null).length, 'markers');
   return markers;
 }
 
 function updateMarkers(activeIndex) {
+  console.log('Updating markers, active index:', activeIndex);
   for (var i in markers) {
     var m = markers[i];
     if (m) {
       var props = m.properties;
       
       var startDate = props['Start date'] ? new Date(props['Start date']).getFullYear() : null;
-      var midDate = props['Mid date'] ? new Date(props['Mid date']).getFullYear() : null;
       var endDate = props['End date'] ? new Date(props['End date']).getFullYear() : null;
       
       var markerClass;
@@ -74,18 +84,16 @@ function updateMarkers(activeIndex) {
         markerClass = defaultMarkerClass;
       } else if (endDate && currentYear >= endDate) {
         markerClass = endStateMarkerClass;
-      } else if (midDate && currentYear >= midDate) {
-        markerClass = midStateMarkerClass;
       } else {
         markerClass = activeMarkerClass;
       }
       
-      // Check if this is the active marker
       if (parseInt(i) === activeIndex) {
         markerClass += ' marker-active';
-        m.openPopup(); // Open the popup for the active marker
+        console.log('Opening popup for active marker:', props['Chapter']);
+        m.openPopup();
       } else {
-        m.closePopup(); // Close the popup for inactive markers
+        m.closePopup();
       }
       
       m.setIcon(L.divIcon({
@@ -97,7 +105,11 @@ function updateMarkers(activeIndex) {
       
       if (!map.hasLayer(m)) {
         m.addTo(map);
+        console.log('Added marker to map:', props['Chapter']);
       }
     }
   }
+  console.log('Markers updated successfully');
 }
+
+console.log('fourmarker.js loaded successfully');

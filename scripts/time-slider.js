@@ -23,7 +23,7 @@ function initializeTimeSlider() {
       var container = L.DomUtil.create('div', 'time-slider-container');
       container.appendChild(slider);
       
-      var yearDisplay = L.DomUtil.create('div', 'year-display');
+      var yearDisplay = L.DomUtil.create('year-display','div');
       yearDisplay.id = 'year-display';
       yearDisplay.innerHTML = currentYear;
       container.appendChild(yearDisplay);

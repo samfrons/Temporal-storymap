@@ -292,7 +292,7 @@ h2 {
 }
 
 .marker-active {
- background-color: red;
+ background-color: #7f0a0a;
      margin-left: -17px !important;
     margin-top: -35px !important;
     mix-blend-mode: plus-lighter;
@@ -379,4 +379,27 @@ h2 {
     font-size: 16px;
     color: #4a4a4a;
     margin-top: 5px;
+}
+
+.custom-popup {
+  max-width: 300px;
+}
+
+.custom-popup h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.custom-popup p {
+  margin: 5px 0;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #f7f7f7;
+  border-radius: 5px;
+}
+
+.leaflet-popup-tip {
+  background: #f7f7f7;
 }
