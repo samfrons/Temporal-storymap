@@ -83,11 +83,7 @@ $(window).on('load', function() {
 
 
   function addBaseMap() {
-      var Thunderforest_Pioneer = L.tileLayer('https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey={apikey}', {
-    attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    apikey: '1a9c23f36ad24df7a2b608bd27cc6a45',
-    maxZoom: 22
-  });
+     
 
     var basemap = trySetting('_tileProvider', '');
     L.tileLayer.provider(basemap, {
@@ -105,7 +101,7 @@ $(window).on('load', function() {
 
 
 
-      Thunderforest_Pioneer.addTo(map);
+     
   }
 
 
