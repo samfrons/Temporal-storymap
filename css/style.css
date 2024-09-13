@@ -1,19 +1,7 @@
 
-
-@font-face {
-  font-family: "Century ATF Old Style BQ";
-  src:
-    local("Century ATF Old Style BQ"),
-    url("../media/CenturyATFOldStyleBQ-Regular.otf") format("opentype") tech(color-COLRv1),
-    url("../media/CenturyATFOldStyleBQ-Regular.otf") format("opentype"),
-   
-}
-
-
 body {
   padding: 0px;
   margin: 0px;
-font-family: "Century ATF Old Style BQ", serif;
   overflow: hidden;
 }
 a {
@@ -27,22 +15,20 @@ a:hover {
 }
 
 #map {
-  height: 200px;
+  height: 50%;
   width: 100vw;
   position: absolute;
-  border-bottom: 0px solid orange;
   top: 0;
   left: 0;
 }
 
 #narration {
   position: absolute;
-  top: 203px;
+  top: 50%;
   width: 100vw;
-  height: calc(100vh - 203px);
+  height: calc(100vh - 50%);
   z-index: 80;
-  background-color: #fffff5 !important;
-  background-image: url('../media/img/paper.jpg');
+  background-color: #ffffff !important;
   color: darkslategray !important;
 }
 
@@ -53,7 +39,7 @@ a:hover {
   height: 100%; /* Adjust to fit max Description length, one setting for all; alternative is 100% */
   overflow-y: scroll;
   overflow-x: hidden;
-   background-image: url('../media/img/paper.jpg');
+ 
 }
 
 span:hover {
@@ -75,9 +61,7 @@ span:hover {
 #title {
   position: absolute;
   left: 0;
-  top: 203px;
-  background-color: beige !important;
-  background-image: url(../media/img/paper.jpg);
+  top: 50%;
   width: 100vw;
   z-index: 100;
   margin: 0;
@@ -155,14 +139,12 @@ a.source:visited {
   text-align: left;
   font-size: 12pt;
   padding: 20px;
-  font-family: "century atf old style bq", serif;
+  font-family: "Helvetica", sans-serif;
 }
 
 .in-focus {
   opacity: 1.0;
-  background-color: bisque;
-    background-image: url(../media/img/paper.jpg);
-    background-blend-mode: luminosity;
+   
 }
 
 .out-focus {
@@ -177,12 +159,6 @@ a.source:visited {
 .leaflet-marker-icon {
   opacity: 0.75;
 }
-
-/*
-  By default, current (active) marker is orange.
-  If you want to change the color, see options here: https://github.com/coryasilva/Leaflet.ExtraMarkers/blob/master/src/assets/css/leaflet.extra-markers.css
-*/
-
 
 .custom-marker {
   transition: all 0.3s ease;
@@ -231,7 +207,7 @@ h1 {
   margin: 0;
   font-size: 2.5em;
   font-family: "Bebas Neue", sans-serif;
-  mix-blend-mode: difference;
+  
 }
 
 h2 {
@@ -240,7 +216,7 @@ h2 {
   font-weight: normal;
   font-family: "Bebas Neue", sans-serif;
   padding: 5%;
- mix-blend-mode: color-burn;
+
 }
 
 
@@ -312,7 +288,6 @@ h2 {
 
 .mid-state-marker {
   background-color: green;
-  
   border-radius: 50%;
   text-align: center;
   color: black;
@@ -330,23 +305,21 @@ h2 {
   font-weight: bold;
   line-height: 30px;
 }
-
 .time-slider-container {
-    background-color: rgba(244, 241, 240, 1);
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 1);
+    padding: 15px;
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .time-slider {
     -webkit-appearance: none;
     width: 100%;
-    height: 10px;
-    background: #d3d3be;
+    height: 2px;
+    background: #ddd;
     outline: none;
     opacity: 1;
     transition: opacity .2s;
-    border-radius: 5px;
 }
 
 .time-slider:hover {
@@ -356,29 +329,45 @@ h2 {
 .time-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
-    background: #8a9a5b;
+    width: 16px;
+    height: 16px;
+    background: #000;
     cursor: pointer;
     border-radius: 50%;
-    border: 2px solid #eae7dc;
+    top: -7px;
+    position: relative;
+    
 }
 
 .time-slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: #8a9a5b;
+    width: 16px;
+    height: 16px;
+    background: #000;
     cursor: pointer;
     border-radius: 50%;
-    border: 2px solid #eae7dc;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.8);
 }
 
-.year-display {
+.time-slider::-webkit-slider-runnable-track {
+    height: 4px;
+    background: #ddd;
+    border: none;
+    border-radius: 1px;
+}
+
+.time-slider::-moz-range-track {
+    height: 4px;
+    background: #ddd;
+    border: none;
+    border-radius: 1px;
+}
+
+#year-display {
     text-align: center;
-    font-family: 'Bebas', serif;
+    font-family: 'Bebas Neue', serif;
     font-size: 16px;
     color: #4a4a4a;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .custom-popup {
