@@ -21,7 +21,7 @@ a:hover {
 }
 
 #map {
-  height: 50%;
+  height: 208px;
   width: 100vw;
   position: absolute;
   top: 0;
@@ -30,14 +30,13 @@ a:hover {
 
 #narration {
   position: absolute;
-  top: 50%;
+  top: 208px;
   width: 100vw;
-  height: calc(100vh - 50%);
-  z-index: 80;
-  background-color: #ffffff !important;
-  color: darkgray; !important;
-      mix-blend-mode: soft-light;
-}
+  height: calc(100vh - 208PX);
+  z-index: 70;
+  background-color: rgba(249,249,249)!important;
+  color: black !important;
+      }
 
 #contents {
   padding: 0;
@@ -68,9 +67,9 @@ span:hover {
 #title {
   position: absolute;
   left: 0;
-  top: 50%;
+  top: 208px;
   width: 100vw;
-  z-index: 70;
+  z-index: 80;
   margin: 0;
   padding: 0;
   visibility: hidden;
@@ -156,7 +155,8 @@ a.source:visited {
 }
 
 .out-focus {
-  opacity: 0.3;
+  opacity: .9;
+  
 }
 
 .leaflet-control-attribution {
@@ -207,7 +207,9 @@ a.source:visited {
 #header {
   padding: 5px 0;
   text-align: center;
-      color: darkslategray !important;
+      color: rgba(249,249,249,1) !important;
+       background-color: #4890b3 !important;
+
 }
 
 /* Storymap title & subtitle */
@@ -215,7 +217,8 @@ h1 {
   margin: 0;
   font-size: 2.5em;
   font-family: "Bebas Neue", sans-serif;
-  color: rgb(0,56,144,1)
+  letter-spacing: 2px;
+ 
   
 }
 
@@ -225,7 +228,7 @@ h2 {
   font-weight: normal;
   font-family: "Bebas Neue", sans-serif;
   padding: 5%;
-  color: rgb(0,56,144,1)
+  
 
 }
 
@@ -260,7 +263,7 @@ h2 {
 
 /* this is confusing, but this is actually the detault marker */
 .default-marker, .active-marker {
-  background-color: rgb(0,60,168);
+  background-color: rgba(0,120,168,1);
   border-radius: 50%;
   font-family: 'Bebas', serif;
   text-align: center;
@@ -278,11 +281,11 @@ h2 {
 }
 
 .marker-active {
- background-color: transparent;
- border: 10px solid rgb(51,136,255);
+ background-color: rgba(0,120,168,.6);
+ border: 10px solid rgba(0,120,168,.6);
      margin-left: -25px !important;
     margin-top: -40px !important;
-    mix-blend-mode: darken;
+    mix-blend-mode: screen;
     max-width: 30px;
     height: 30px;
     max-height: 30px !important;
@@ -295,6 +298,7 @@ h2 {
   color: white;
   font-weight: bold;
   line-height: 30px;
+  font-family: 'Bebas Neue', serif;
 }
 
 
@@ -304,7 +308,7 @@ h2 {
   text-align: center;
   color: black;
   font-weight: bold;
-  font-family: bebas;
+  font-family: 'Bebas Neue', serif;
   line-height: 30px;
 }
 
@@ -313,7 +317,7 @@ h2 {
   border-radius: 50%;
   text-align: center;
   color: white;
-  font-family: bebas;
+  font-family: 'Bebas Neue', serif;
   font-weight: bold;
   line-height: 30px;
 }
@@ -343,7 +347,7 @@ h2 {
     appearance: none;
     width: 16px;
     height: 16px;
-    background: #000;
+    background:   rgba(77,82,81,1) ;
     cursor: pointer;
     border-radius: 50%;
     top: -7px;

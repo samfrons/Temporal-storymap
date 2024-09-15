@@ -83,7 +83,11 @@ $(window).on('load', function() {
 
 
   function addBaseMap() {
-     
+      var Thunderforest_Pioneer = L.tileLayer('https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey={apikey}', {
+    attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    apikey: '1a9c23f36ad24df7a2b608bd27cc6a45',
+    maxZoom: 22
+  });
 
     var basemap = trySetting('_tileProvider', '');
     L.tileLayer.provider(basemap, {
@@ -100,8 +104,6 @@ $(window).on('load', function() {
     }).addTo(map);
 
 
-
-     
   }
 
 
@@ -312,7 +314,7 @@ $('#contents').append(container);
     }
 
     // For each block (chapter), calculate how many pixels above it
-    pixelsAbove[0] = -200;
+    pixelsAbove[0] = -100;
     for (i = 1; i < chapters.length; i++) {
       pixelsAbove[i] = pixelsAbove[i-1] + $('div#container' + (i-1)).height() + chapterContainerMargin;
     }
