@@ -408,3 +408,121 @@ h2 {
 .leaflet-popup-tip {
   background: #f7f7f7;
 }
+
+
+
+.embedded-content-wrapper {
+  width: 100%;
+  margin-bottom: 15px;
+  overflow: hidden; /* Hide scrollbars on the wrapper */
+}
+
+.embedded-content {
+  width: 100%;
+  height: 300px; /* Adjust as needed */
+  overflow: hidden; /* Hide scrollbars */
+}
+
+.embedded-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  overflow: hidden; /* Hide scrollbars */
+  pointer-events: none; /* Prevent scrolling on touch devices */
+}
+
+/* Hide scrollbars for different browsers */
+.embedded-content iframe::-webkit-scrollbar {
+  display: none;
+}
+
+.embedded-content iframe {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+.popup-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.popup-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.chart-container {
+  width: 100%;
+  height: 500px;
+  min-height: 300px;
+}
+
+
+
+.leaflet-popup-content {
+  width: 80vw !important;
+  max-height: 80vh !important;
+  overflow-y: auto;
+}
+
+
+.leaflet-container {
+  z-index: 100 !important;
+}
+
+/* Style for the custom popup */
+.custom-popup {
+  z-index: 1000 !important;
+}
+
+/* Ensure the popup content is above other elements */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  z-index: 1001 !important;
+}
+
+/* Ensure the popup close button is clickable */
+.leaflet-container .leaflet-popup-close-button {
+  z-index: 1002 !important;
+}
+
+.popup-container {
+  display: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.close-popup {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+  color: #666;
+}
+
+.close-popup:hover {
+  color: #000;
+}
+
+
+
+
+.popup-inner {
+  width: 100%;
+  max-width: 500px; /* Adjust as needed */
+}

@@ -205,6 +205,82 @@ var container = $('<div></div>', {
 // Add chapter header
 container.append('<p class="chapter-header">' + c['Chapter'] + '</p>');
 
+  // Check for popup
+  if (c['Popup']) {
+    console.log("Popup value for chapter " + i + ":", c['Popup']); // Debug: Log popup value
+    var popupButton = $('<button class="popup-button">More Info</button>');
+    container.append(popupButton);
+    
+    // Use a closure to capture the correct popup value
+    (function(popupValue) {
+      popupButton.on('click', function() {
+        showPopup(popupValue);
+      });
+    })(c['Popup']);
+  } else {
+    console.log("No popup for chapter " + i); // Debug: Log when there's no popup
+  }
+
+  
+
+function showPopup(popupId) {
+  console.log("Attempting to show popup:", popupId); // Debug: Log attempt to show popup
+  
+  if (!popupId) {
+    console.error("Popup ID is undefined or empty");
+    alert("No additional information available.");
+    return;
+  }
+
+  var popupContent = $('<div class="popup-content"></div>');
+  
+  // Load the popup content
+  $.ajax({
+    url: 'popups/' + popupId + '.html',
+    type: 'GET',
+    dataType: 'html',
+    success: function(content) {
+      console.log("Popup content loaded successfully"); // Debug: Log successful load
+      popupContent.html(content);
+      openPopup(popupContent);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.error("Failed to load popup:", popupId, "Error:", textStatus, errorThrown);
+      console.log("Response:", jqXHR.responseText);
+      alert("Failed to load additional information. Error: " + textStatus);
+    }
+  });
+}
+
+function openPopup(content) {
+  var popup = L.popup({
+    maxWidth: "80%",
+    maxHeight: "80%"
+  })
+  .setLatLng(map.getCenter())
+  .setContent(content[0])
+  .openOn(map);
+
+  // Initialize any interactive elements if needed
+  initializePopupContent(content);
+}
+
+// Function to initialize popup content if needed
+function initializePopupContent(container) {
+  // Check if the popup contains a chart container
+  if (container.find('.chart-container').length > 0) {
+    createInteractiveChart(container.find('.chart-container')[0]);
+  }
+  // Add more initializations for different popup types as needed
+}
+
+
+// Add embedded content if it exists
+if (c['EmbeddedContent']) {
+  container.append('<div class="embedded-content-wrapper"><div class="embedded-content">' + c['EmbeddedContent'] + '</div></div>');
+}
+
+
 // Handle multiple media items
 var mediaLinks = c['Media Link'] ? c['Media Link'].split(',').map(item => item.trim()) : [];
 var mediaCredits = c['Media Credit'] ? c['Media Credit'].split(',').map(item => item.trim()) : [];

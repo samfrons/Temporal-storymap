@@ -98,7 +98,7 @@ function updateMarkers(activeIndex) {
       
       m.setIcon(L.divIcon({
         className: markerClass,
-        html: props['Marker'] === 'Numbered' ? (parseInt(i) + 1).toString() : '',
+        html: props['Marker'] === 'Numbered' ? (parseInt(i) + 0).toString() : '',
         iconSize: [30, 30],
         iconAnchor: [15, 30]
       }));
